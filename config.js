@@ -112,18 +112,22 @@ const LOVE_CONFIG = {
   ],
 
   // --- Love Letter Text ---
-  letterGreeting: "Dear Nidhi,",
-  letterBody: `I don't really know how to put everything I feel into words, so I decided to make you a whole little corner of the internet instead. 😭❤️
+ letterGreeting: "Dear Nidhi,",
 
-You make my days happier in ways you probably don't even realize.
+letterBody: `I don't really know how to put everything I feel into words, but somehow, whenever I try to describe you, words still don't feel enough.
 
-Every random conversation, every laugh, every silly moment and every little thing about you has become a memory I genuinely love.
+A girl who’s ravishing with an elegant and winsome smile on her face, which makes her eyes very flattering, accentuated by her tresses, and who looks miraculous in her yellow dress.
 
-I hope whenever you come back to this website, it reminds you of one simple thing:
+But honestly, it's not just about how beautiful you look. It's the little things about you that make you so special to me — your smile, your presence, the way you make ordinary moments feel a little more beautiful, and the memories that somehow stay with me.
 
-You are very, very special to me.`,
-  letterClosing: "With lots of love,",
-  letterSign: "Rajveer ❤️",
+I wanted to make this little corner of the internet because sometimes a normal message just isn't enough to say what someone means to you.
+
+So whenever you come back to this website, I hope you remember one simple thing:
+
+You are genuinely special to me, Nidhi. ❤️`,
+
+letterClosing: "With lots of love,",
+letterSign: "Rajveer ❤️",
 
   // --- Mini Game Settings ---
   gameMaxClicks: 5,
