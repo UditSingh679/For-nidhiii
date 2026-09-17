@@ -2,12 +2,472 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nidhi & Rajveer ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffeef2">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>For Nidhi ❤️ From Rajveer</title>
+  <meta name="description" content="A cute, funny, romantic interactive website made with love for Nidhi by Rajveer.">
+  
+  <!-- Google Fonts: Cute, Playful & Handwritten fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Comfortaa:wght@500;700&family=Fredoka:wght@400;600;700&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <h1>Made with love for Nidhi by Rajveer ❤️</h1>
-  <p>Welcome to our little website 💕</p>
+
+  <!-- ================= BACKGROUND FLOATING ELEMENTS CANVAS ================= -->
+  <canvas id="ambient-canvas"></canvas>
+  <div id="particle-container"></div>
+
+  <!-- ================= HTML5 BACKGROUND AUDIO ELEMENT (IPHONE & ANDROID COMPLIANT) ================= -->
+  <audio id="bgMusicPlayer" loop playsinline webkit-playsinline preload="auto" src="assets/romantic_music.wav"></audio>
+
+  <!-- ================= MUSIC & SOUND FLOATING CONTROLS ================= -->
+  <div class="sound-dock" id="soundDock">
+    <button class="sound-btn music-control-btn pulse-music-btn" id="musicToggle" title="Play/Mute Romantic Music" aria-label="Play Music">
+      <span class="icon" id="musicIcon">🎵</span>
+      <span class="btn-text" id="musicStatusText">Play Music</span>
+      <span class="music-equalizer hidden" id="musicEqualizer">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+    <button class="sound-btn" id="sfxToggle" title="Toggle Sound Effects">
+      <span class="icon" id="sfxIcon">🔊</span>
+      <span class="btn-text">SFX: ON</span>
+    </button>
+  </div>
+
+  <!-- ================= 1. LOADING SCREEN ================= -->
+  <div class="screen-overlay" id="loadingScreen">
+    <div class="loading-content">
+      <div class="cat-loader-wrapper">
+        <img src="assets/cat_heart.gif" alt="Cute Cat With Heart" class="loader-cat-img" onerror="this.src='assets/shy_cat.jpg'">
+        <div class="beating-heart-badge">💖</div>
+      </div>
+      <h1 class="loading-title" id="loadingTitleText">Made something for Nidhi... 👀❤️</h1>
+      <p class="loading-author" id="loadingAuthorText">by Rajveer</p>
+      
+      <div class="loading-bar-wrapper">
+        <div class="loading-bar-fill" id="loadingBarFill"></div>
+      </div>
+      <div class="sparkles-decor">✨ 🌸 ✨ 💗 ✨</div>
+    </div>
+  </div>
+
+  <!-- ================= 2. ENVELOPE OPENING SCREEN ================= -->
+  <div class="screen-overlay hidden" id="envelopeScreen">
+    <div class="envelope-container">
+      <div class="floating-hearts-envelope">
+        <span>💕</span><span>✨</span><span>💌</span><span>💖</span><span>🌸</span>
+      </div>
+      
+      <div class="envelope" id="envelopeObj">
+        <div class="envelope-flap" id="envelopeFlap"></div>
+        <div class="envelope-pocket"></div>
+        <div class="letter-peek">
+          <div class="letter-peek-inner">
+            <span class="peek-seal">❤️</span>
+            <p>For Nidhi</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="envelope-prompt" id="envelopePromptText">Nidhi, you have a message 💌</h2>
+      <button class="btn-primary pulse-btn" id="openEnvelopeBtn">Open it 🥹</button>
+      <p class="envelope-audio-hint">✨ Tap to open with music ✨</p>
+    </div>
+  </div>
+
+  <!-- ================= MAIN WEBSITE WRAPPER ================= -->
+  <main id="mainSite" class="site-hidden">
+
+    <!-- ================= 3. HERO SECTION ================= -->
+    <section class="hero-section" id="hero">
+      <div class="hero-badge">💌 SPECIAL DELIVERY JUST FOR YOU</div>
+      <h1 class="hero-title" id="heroGreetingText">Hey Nidhi ❤️</h1>
+      
+      <div class="typewriter-container">
+        <p class="hero-typed" id="heroTypedText"></p>
+        <span class="typed-cursor">|</span>
+      </div>
+
+      <!-- Shy Cat Reaction Meme -->
+      <div class="hero-cat-reaction" id="heroCatBox">
+        <div class="speech-bubble-hero" id="heroSpeechBubble">
+          "is for me? 👉👈🥺"
+        </div>
+        <div class="hero-cat-img-box">
+          <img src="assets/shy_cat.jpg" alt="Shy Cat Meme" class="hero-cat-img" id="heroCatImg">
+          <div class="floating-bubble-heart">💗</div>
+        </div>
+      </div>
+
+      <!-- Romantic Music Pill in Hero -->
+      <button class="hero-music-pill" id="heroMusicPrompt" title="Play / Mute Music">
+        <span class="music-pill-icon">🎵</span>
+        <span id="heroMusicPromptText">Play Romantic Music</span>
+        <span class="music-pill-sparkle">✨</span>
+      </button>
+
+      <button class="btn-primary hero-btn" id="enterWorldBtn">
+        <span>Enter my little world 💗</span>
+        <span class="btn-arrow">👇</span>
+      </button>
+
+      <div class="scroll-down-hint">
+        <span>scroll down for stickers & chaos</span>
+        <div class="bounce-arrow">↓</div>
+      </div>
+    </section>
+
+    <!-- ================= 4. STICKER CHAOS / REACTION WALL ================= -->
+    <section class="section sticker-section" id="stickerWall">
+      <div class="section-header">
+        <span class="section-tag">MEME VAULT 📸</span>
+        <h2 class="section-title">Basically Me Whenever I Think About You 😭❤️</h2>
+        <p class="section-subtitle">Click ANY sticker to see what my brain is thinking right now!</p>
+      </div>
+
+      <div class="sticker-grid" id="stickerGrid">
+        <!-- Sticker 1: Shy Cat pointing -->
+        <div class="sticker-card" data-reaction="me when Nidhi texts 😭❤️">
+          <div class="sticker-img-wrap">
+            <img src="assets/shy_cat.jpg" alt="Shy Cat">
+          </div>
+          <span class="sticker-label">👉👈 is for me?</span>
+        </div>
+
+        <!-- Sticker 2: Blushing Pixel Eyes -->
+        <div class="sticker-card" data-reaction="STOP BEING THIS ADORABLE 😭">
+          <div class="sticker-img-wrap">
+            <img src="assets/blushing_emoji.jpg" alt="Blushing Eyes">
+          </div>
+          <span class="sticker-label">Overwhelmed 🥺</span>
+        </div>
+
+        <!-- Sticker 3: Proposal doodle meme -->
+        <div class="sticker-card" data-reaction="caught in 4K being in love 💀❤️">
+          <div class="sticker-img-wrap">
+            <img src="assets/ring_proposal.jpg" alt="Ring Proposal Meme">
+          </div>
+          <span class="sticker-label">Take it! 💍❤️</span>
+        </div>
+
+        <!-- Sticker 4: Cat Heart -->
+        <div class="sticker-card" data-reaction="that's literally me 😭">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_heart.gif" alt="Cat Heart">
+          </div>
+          <span class="sticker-label">Sending Love 💖</span>
+        </div>
+
+        <!-- Sticker 5: Cute Eyes Cat -->
+        <div class="sticker-card" data-reaction="why are you so cute?? 🥺">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_cute_eyes.gif" alt="Cute Eyes Cat">
+          </div>
+          <span class="sticker-label">Pookie Eyes 👀</span>
+        </div>
+
+        <!-- Sticker 6: Cat Spinning Love -->
+        <div class="sticker-card" data-reaction="okay I'm blushing now 🫠">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_love_spin.gif" alt="Spinning Cat">
+          </div>
+          <span class="sticker-label">Dizzy with love 💫</span>
+        </div>
+
+        <!-- Sticker 7: Cat Shy GIF -->
+        <div class="sticker-card" data-reaction="my heart can't handle this 🥺">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_shy.gif" alt="Cat Shy">
+          </div>
+          <span class="sticker-label">Hehe shy 🙈</span>
+        </div>
+
+        <!-- Sticker 8: Cat Hug -->
+        <div class="sticker-card" data-reaction="come here and hug me already 🫂">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_hug.gif" alt="Cat Hug">
+          </div>
+          <span class="sticker-label">Virtual Hug 🤗</span>
+        </div>
+
+        <!-- Sticker 9: Crying Cat -->
+        <div class="sticker-card" data-reaction="Nidhi, look what you've done to me 😭">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_cry.gif" alt="Crying Cat">
+          </div>
+          <span class="sticker-label">Crying Happy Tears 😭</span>
+        </div>
+
+        <!-- Sticker 10: Typing Cat -->
+        <div class="sticker-card" data-reaction="typing 1000 words per minute to tell you everything ⌨️">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_typing.gif" alt="Typing Cat">
+          </div>
+          <span class="sticker-label">Fast Typer 🐾</span>
+        </div>
+
+        <!-- Sticker 11: Cat Spin Chaos -->
+        <div class="sticker-card" data-reaction="brain empty, just Nidhi 💭❤️">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_spin.gif" alt="Spinning Chaos Cat">
+          </div>
+          <span class="sticker-label">Chaos Mode 🌪️</span>
+        </div>
+
+        <!-- Sticker 12: Cat Wave -->
+        <div class="sticker-card" data-reaction="100% certified Rajveer moment ❤️">
+          <div class="sticker-img-wrap">
+            <img src="assets/cat_wave.gif" alt="Cat Wave">
+          </div>
+          <span class="sticker-label">Hiii bestie/love 👋</span>
+        </div>
+      </div>
+
+      <!-- Pop-up Dynamic Reaction Bubble -->
+      <div class="reaction-toast" id="reactionToast">
+        <span class="toast-emoji">💬</span>
+        <span class="toast-text" id="toastText">Clicked!</span>
+      </div>
+    </section>
+
+    <!-- ================= 5. WHY I LOVE YOU SECTION ================= -->
+    <section class="section reasons-section" id="reasonsSection">
+      <div class="section-header">
+        <span class="section-tag">REASONS FOLDER 📁</span>
+        <h2 class="section-title">Reasons I Love You, Nidhi 💗</h2>
+        <p class="section-subtitle">Click each card to unlock the truth 🥹</p>
+      </div>
+
+      <div class="reasons-grid" id="reasonsGrid">
+        <!-- Injected via JS from LOVE_CONFIG.reasons -->
+      </div>
+    </section>
+
+    <!-- ================= 6. FUNNY LOVE CALCULATOR ================= -->
+    <section class="section calculator-section" id="calculatorSection">
+      <div class="calculator-card">
+        <div class="calc-top-badge">🔬 TOP SECRET SCIENTIFIC SCANNER</div>
+        <h2 class="calc-title">How Much Does Rajveer Love Nidhi?</h2>
+        <p class="calc-subtitle">Running algorithmic scans on Rajveer's heart rate & dopamine levels...</p>
+
+        <div class="calc-display-box">
+          <div class="calc-status-text" id="calcStatus">Ready to calculate 💖</div>
+          <div class="meter-bar-track">
+            <div class="meter-bar-fill" id="meterFill"></div>
+          </div>
+          <div class="calc-percent" id="calcPercent">0%</div>
+        </div>
+
+        <button class="btn-primary calc-btn" id="startCalcBtn">Calculate Love 💖</button>
+
+        <!-- Final Reveal Modal/Box -->
+        <div class="calc-result-box hidden" id="calcResultBox">
+          <div class="result-badge">RESULT CONFIRMED</div>
+          <h3 class="result-value">♾️ INFINITY</h3>
+          <p class="result-subtext">ERROR: The amount of love has exceeded all known physics parameters! ❤️💥</p>
+          <img src="assets/cat_cry.gif" alt="Overwhelmed Crying Cat" class="calc-cat-gif">
+          <div class="result-sparkles">💖 ✨ 💖 ✨ 💖</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 7. CUTE LOVE LETTER ================= -->
+    <section class="section letter-section" id="letterSection">
+      <div class="section-header">
+        <span class="section-tag">HANDWRITTEN NOTE ✍️</span>
+        <h2 class="section-title">A Letter From Rajveer 💌</h2>
+        <p class="section-subtitle">Click the seal to unfold the letter...</p>
+      </div>
+
+      <div class="parchment-wrapper">
+        <!-- Decorative Stickers around the letter -->
+        <div class="parchment-sticker sticker-top-left" title="Click me!">
+          <img src="assets/shy_cat.jpg" alt="Shy Cat">
+          <span>🥺</span>
+        </div>
+        <div class="parchment-sticker sticker-top-right" title="Click me!">
+          <img src="assets/cat_heart.gif" alt="Cat Heart">
+          <span>❤️</span>
+        </div>
+        <div class="parchment-sticker sticker-bottom-left" title="Click me!">
+          <img src="assets/blushing_emoji.jpg" alt="Blushing">
+          <span>👉👈</span>
+        </div>
+        <div class="parchment-sticker sticker-bottom-right" title="Click me!">
+          <img src="assets/ring_proposal.jpg" alt="Ring Proposal">
+          <span>💍</span>
+        </div>
+
+        <div class="parchment-card folded" id="parchmentCard">
+          <div class="wax-seal-btn" id="waxSealBtn" title="Click to open letter">
+            <span class="wax-heart">💌</span>
+            <span class="wax-label">Click to Unfold</span>
+          </div>
+
+          <div class="parchment-inner" id="parchmentInner">
+            <div class="letter-header">
+              <h3 class="letter-to" id="letterGreeting">Dear Nidhi,</h3>
+              <span class="letter-date">Written with pure love 🌸</span>
+            </div>
+
+            <div class="letter-body-typed" id="letterBodyTyped">
+              <!-- Animated typewriter text will be inserted here -->
+            </div>
+
+            <div class="letter-footer">
+              <p class="letter-closing" id="letterClosing">With lots of love,</p>
+              <h4 class="letter-signature" id="letterSign">Rajveer ❤️</h4>
+              <div class="letter-kisses">🐾 💋 🐾 💋</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 8. MINI GAME: CATCH MY HEART ================= -->
+    <section class="section game-section" id="gameSection">
+      <div class="section-header">
+        <span class="section-tag">CUTE CHALLENGE 🎮</span>
+        <h2 class="section-title">Catch My Heart 💘</h2>
+        <p class="section-subtitle">Try clicking the bouncing heart before it runs away!</p>
+      </div>
+
+      <div class="game-arena" id="gameArena">
+        <div class="game-hud">
+          <div class="hud-item">
+            <span>Score: </span>
+            <strong id="gameScore">0</strong> / <span id="gameGoal">5</span>
+          </div>
+          <div class="hud-status" id="gameStatus">Click the heart! 👀</div>
+        </div>
+
+        <!-- Bouncing Heart Target -->
+        <div class="bouncing-heart-target" id="heartTarget">
+          <span class="target-symbol">💖</span>
+          <span class="target-tail">💨</span>
+        </div>
+
+        <!-- Victory Dialog inside arena -->
+        <div class="game-victory-box hidden" id="gameVictory">
+          <div class="victory-header">🎉 CAUGHT! 🎉</div>
+          <p class="victory-text-1">"Okay okay 😭 You caught it."</p>
+          <p class="victory-text-2">"But unfortunately..."</p>
+          <h3 class="victory-punchline">YOU ALREADY HAVE MY HEART ❤️</h3>
+          <div class="victory-img-box">
+            <img src="assets/ring_proposal.jpg" alt="Proposal Meme" class="victory-ring-img">
+          </div>
+          <button class="btn-primary" id="playAgainBtn">Play Again 🔁</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 9. MEME / INSIDE-JOKE SECTION ================= -->
+    <section class="section meme-section" id="memeSection">
+      <div class="section-header">
+        <span class="section-tag">OUR REALITY 💀</span>
+        <h2 class="section-title">Things That Are Basically Us 💀❤️</h2>
+        <p class="section-subtitle">If someone monitored our chats, this is what they'd see:</p>
+      </div>
+
+      <div class="meme-grid" id="memeGrid">
+        <!-- Injected via JS from LOVE_CONFIG.memes -->
+      </div>
+    </section>
+
+    <!-- ================= 10. SECRET BUTTON ================= -->
+    <section class="section secret-section" id="secretSection">
+      <div class="secret-box">
+        <span class="secret-warning-badge">⚠️ HIGH LEVEL CURIOSITY TEST</span>
+        <h3 class="secret-prompt">Under no circumstances should you press this button.</h3>
+        <p class="secret-subtext">Seriously. Don't do it. You've been warned.</p>
+        
+        <button class="secret-btn" id="secretBtn">
+          <span class="secret-btn-icon">👀</span>
+          <span>Don't Click This 👀</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Secret Dramatic Modal -->
+    <div class="secret-overlay hidden" id="secretOverlay">
+      <div class="secret-modal-content">
+        <div class="secret-stage stage-1" id="secretStage1">
+          <img src="assets/cat_cry.gif" alt="Dramatic Crying Cat" class="secret-gif">
+          <h2 class="secret-dramatic-text">WHY DID YOU CLICK IT 😭</h2>
+          <p class="secret-wait-text">System destabilizing...</p>
+        </div>
+
+        <div class="secret-stage stage-2 hidden" id="secretStage2">
+          <img src="assets/shy_cat.jpg" alt="Shy Cat" class="secret-gif">
+          <h2 class="secret-twist-text">...good thing I wanted you to. 🥹</h2>
+        </div>
+
+        <div class="secret-stage stage-3 hidden" id="secretStage3">
+          <div class="heart-fireworks-container" id="heartFireworks"></div>
+          <img src="assets/cat_love_spin.gif" alt="Love Spin Cat" class="secret-gif-big">
+          <h1 class="secret-love-name">Nidhi ❤️</h1>
+          <h2 class="secret-love-confession">I LOVE YOU.</h2>
+          <p class="secret-signature">— Rajveer</p>
+          <button class="btn-primary" id="closeSecretBtn">I love you too 🥹❤️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 11. FINAL NIGHT SKY ================= -->
+    <section class="section night-sky-section" id="nightSkySection">
+      <canvas id="night-sky-canvas"></canvas>
+      
+      <div class="moon-glow">
+        <div class="crescent-moon">🌙</div>
+      </div>
+
+      <div class="night-sky-content">
+        <div class="night-text-sequence" id="nightSeq">
+          <p class="night-line night-1">Nidhi...</p>
+          <p class="night-line night-2">If you ever forget how loved you are...</p>
+          <p class="night-line night-3">come back here. ❤️</p>
+          <p class="night-line night-4">Because Rajveer will always have a little corner of the internet dedicated to you.</p>
+          <div class="night-final-signature">
+            <p>Made with love,</p>
+            <h3>Rajveer ❤️</h3>
+          </div>
+        </div>
+
+        <div class="waving-cat-box">
+          <img src="assets/cat_wave.gif" alt="Cat Waving Goodbye" class="waving-cat-img">
+          <p class="cat-waving-caption">Bye bye for now! Keep smiling 🐾❤️</p>
+        </div>
+
+        <div class="night-actions">
+          <button class="btn-hug" id="sendHugBtn">
+            <span>Send Rajveer a Hug 🫂</span>
+          </button>
+          <button class="btn-back-top" id="backToTopBtn">
+            <span>Back to Top 🚀</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Built with endless love, laughter, and memes for <strong>Nidhi</strong> by <strong>Rajveer</strong> ❤️</p>
+      <p class="footer-small">Infinite Love Guarantee • 100% Cuteness Certified 🐾</p>
+    </footer>
+
+  </main>
+
+  <!-- External Confetti JS for reliable celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Config & Script -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
